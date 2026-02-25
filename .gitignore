@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
+
+# Development / investigation scripts (not part of the integration)
+probe_dps.py
+monitor.py
+cloud_monitor.py
+fetch_device_schema.py
+pad_direction_before.py
+pad_direction_after.py
+snapshot.json
+
+# Local Claude settings
+.claude/
+
+# The key-grabber tool lives in its own repo
+eufy-clean-local-key-grabber/
