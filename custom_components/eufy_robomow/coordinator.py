@@ -1,6 +1,7 @@
 """DataUpdateCoordinator for Eufy Robomow."""
 from __future__ import annotations
 
+import asyncio
 import logging
 import time
 from datetime import timedelta
@@ -166,7 +167,9 @@ class EufyMowerCoordinator(DataUpdateCoordinator[dict]):
                 self._device.set_value, int(dp), value
             )
             _LOGGER.debug("Command result: %s", result)
-            # Immediately refresh state
+            # Mower takes ~1–3 s to update its state after receiving a command;
+            # without this delay the immediate re-poll reads stale DPS values.
+            await asyncio.sleep(2)
             await self.async_request_refresh()
             return True
         except Exception as exc:  # noqa: BLE001
